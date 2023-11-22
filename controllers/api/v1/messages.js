@@ -37,7 +37,6 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     try {
         let id = req.params.id;
-        let newData = req.body; // Assuming you're sending updated data in the request body
         let message = await Message.find({ _id: id });
 
         if (!message) {
@@ -46,12 +45,6 @@ const update = async (req, res) => {
                 message: "Message not found"
             });
         }
-
-        // Update the message object with the new data
-        message = Object.assign(message, newData);
-
-        // Save the updated message
-        await message.save();
 
         res.json({
             status: "success",
