@@ -15,9 +15,11 @@ const index = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    let message = req.body.message;
+    let message = req.body.message.text;
+    let user = req.body.message.user;
     let m = new Message();
     m.message = message;
+    m.user = user;
     await m.save();
 
     res.json({
@@ -36,7 +38,7 @@ const update = async (req, res) => {
     try {
         let id = req.params.id;
         let newData = req.body; // Assuming you're sending updated data in the request body
-        let message = await Message.findById(id);
+        let message = await Message.find({ _id: id });
 
         if (!message) {
             return res.status(404).json({
