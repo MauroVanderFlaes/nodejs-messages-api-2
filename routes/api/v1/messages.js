@@ -7,6 +7,7 @@ const router = express.Router();
 const messagesController = require("../../../controllers/api/v1/messages");
 
 router.get("/", messagesController.index);
+router.get("/:id", messagesController.indexId);
 router.post("/", messagesController.create);
 router.put("/:id", messagesController.update);
 router.delete("/:id", messagesController.destroy);

@@ -14,6 +14,20 @@ const index = async (req, res) => {
     });
 };
 
+//making a get for one message using id
+const indexId = async (req, res) => {
+    let id = req.params.id;
+    let messageId = await Message.find({ _id: id });
+    res.json({
+        status: "success",
+        message: "GET one message by ID",
+        data: [
+            {
+                message: id,
+            },
+        ],
+    });
+}
 const create = async (req, res) => {
     let message = req.body.message.text;
     let user = req.body.message.user;
@@ -79,6 +93,7 @@ const destroy = async (req, res) => {
 
 
 module.exports.index = index;
+module.exports.indexId = indexId;
 module.exports.create = create;
 module.exports.update = update;
 module.exports.destroy = destroy;
